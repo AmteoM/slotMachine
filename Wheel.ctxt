@@ -1,0 +1,28 @@
+#BlueJ class context
+#Sun Aug 23 23:37:59 COT 2026
+comment0.target=Wheel
+comment1.params=xpos
+comment1.target=Wheel(int)
+comment1.text=\r\n Constructor for wheel \r\n @param xpos horizontal position of the wheel \r\n
+comment10.params=i
+comment10.target=void updateBorder(int)
+comment10.text=\r\n Move the border circle so it sits centered behind the symbol\r\n at index i, and bring that symbol back to the front so the\r\n border does not cover its color.\r\n @param i the index of the symbol that should be highlighted\r\n
+comment2.params=color
+comment2.target=void addSymbol(java.lang.String)
+comment2.text=\r\n Add a symbol in a wheel \r\n @param color is the color of the symbol that will be added\r\n
+comment3.params=symbol
+comment3.target=void delSymbol(java.lang.String)
+comment3.text=\r\n Delete a symbol in a wheel\r\n @param symbol is the color of the symbol that will be deleted\r\n
+comment4.target=void spin()
+comment4.text=\r\n Spin and get a random symbol of the wheel\r\n
+comment5.target=void makeVisible()
+comment5.text=\r\n Make all symbols of this wheel visible on the canvas,\r\n and show the border around the current winning symbol.\r\n
+comment6.target=void makeInvisible()
+comment6.text=\r\n Make all symbols of this wheel invisible on the canvas,\r\n including the border.\r\n
+comment7.target=java.util.List getSymbols()
+comment7.text=\r\n Return the colors of the symbols mounted on this wheel, in order.\r\n
+comment8.target=java.lang.String getVisibleSymbol()
+comment8.text=\r\n Return the color of the symbol currently marked as visible\r\n (the result of the last spin, or the first symbol by default\r\n if the wheel has never spun). Returns an empty string if the\r\n wheel has no symbols mounted.\r\n
+comment9.target=int currentIndex()
+comment9.text=\r\n Return the index that should be treated as "the current winning\r\n symbol" - index 0 by default if the wheel has never spun.\r\n
+numComments=11

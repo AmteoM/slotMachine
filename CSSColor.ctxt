@@ -1,0 +1,13 @@
+#BlueJ class context
+#Sun Aug 23 23:37:59 COT 2026
+comment0.target=CSSColor
+comment0.text=\r\n Translates CSS standard color names into Color objects.\r\n @author (sus nombres)\r\n @version (fecha)\r\n
+comment1.params=name
+comment1.target=java.awt.Color get(java.lang.String)
+comment1.text=\r\n Return the Color matching a CSS color name.\r\n @param name the CSS color name\r\n @return the matching Color, or null if the name is not supported\r\n
+comment2.params=name
+comment2.target=boolean isValid(java.lang.String)
+comment2.text=\r\n Check whether a name matches a supported CSS color.\r\n @param name the CSS color name\r\n @return true if the color is supported\r\n
+comment3.target=java.lang.String[] availableColors()
+comment3.text=\r\n Return every supported color name.\r\n @return the supported CSS color names\r\n
+numComments=4

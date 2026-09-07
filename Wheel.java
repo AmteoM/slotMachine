@@ -15,6 +15,7 @@ public class Wheel {
     private Circle border;
     private int borderX;
     private int borderY;
+    private boolean isLocked;
     private static final int BORDERMARGIN = 6;
     private static final int BASEX = 20;
     private static final int BASEY = 50;
@@ -30,6 +31,7 @@ public class Wheel {
     public Wheel(int xpos) {
         symbols = new ArrayList<Circle>();
         isVisible = false;
+        isLocked = false;
         visibleIn = -1;
         yPosition = BASEY;
         xPosition = BASEX + (xpos - 1) * SEPARATIONX;
@@ -45,16 +47,30 @@ public class Wheel {
      * Add a symbol in a wheel 
      * @param color is the color of the symbol that will be added
      */
-    public void addSymbol(String color){
+    public void addSymbol(int pos, String color){
+        if (pos < 1) {
+            pos = 1; 
+        }
+        if (pos > symbols.size() + 1){
+            pos = symbols.size() + 1;
+        }
+        int index = pos - 1;
+        for (int i = index; i < symbols.size(); i++){
+            symbols.get(i).moveVertical(SEPARATIONY);
+        }
         Circle circle = new Circle();
         circle.changeColor(color);
         int cxPos = xPosition - POSCIRCXCANV;
-        int cyPos = yPosition - POSCIRCYCANV + symbols.size() * SEPARATIONY;
+        int cyPos = yPosition - POSCIRCYCANV + index * SEPARATIONY;
         circle.moveVertical(cyPos);
         circle.moveHorizontal(cxPos);
-        symbols.add(circle);
-        if (isVisible) {
+        symbols.add(index, circle);
+        if (isVisible){
             circle.makeVisible();
+        }
+        visibleIn = -1;
+        if (isVisible){
+            updateBorder(currentIndex());
         }
     }
 
@@ -79,6 +95,11 @@ public class Wheel {
             for (int i = foundIn; i < symbols.size(); i++){
                 symbols.get(i).moveVertical(-SEPARATIONY);
             }
+            
+            visibleIn = -1;
+            if (isVisible && symbols.size() > 0){
+                updateBorder(currentIndex());
+            }
         }
     }
 
@@ -86,6 +107,9 @@ public class Wheel {
      * Spin and get a random symbol of the wheel
      */
     public void spin(){
+        if (isLocked){
+            return;
+        }
         if (symbols.size() > 0){
             int randomIn = (int)(Math.random() * symbols.size());
             visibleIn = randomIn;
@@ -177,5 +201,98 @@ public class Wheel {
             border.makeVisible();
             symbols.get(i).moveHorizontal(0);
         }
+    }
+    
+    public void placeSymbol(String symbol){
+        if (isLocked){
+            return;
+        }
+        int foundIn = -1;
+        for (int i = 0; i < symbols.size(); i++){
+            if (symbols.get(i).getColor().equals(symbol)){
+                foundIn = i;
+                break;
+            }
+        }
+        if (foundIn != -1){
+            visibleIn = foundIn;
+            if(isVisible){
+                updateBorder(visibleIn);
+            }
+        }
+    }
+    
+    /**
+     * Lock this wheel so that it cannot be spun or placed.
+     */
+    public void lock(){
+        isLocked = true;
+    }
+
+    /**
+     * Unlock this wheel so that it can be spun again.
+     */
+    public void unlock(){
+        isLocked = false;
+    }
+
+    /**
+     * Change the color of the border that marks the current symbol.
+     * @param color the CSS color name for the border
+     */
+    public void setBorderColor(String color){
+        border.changeColor(color);
+        if (isVisible && symbols.size() > 0) {
+            updateBorder(currentIndex());
+        }
+    }
+    
+    /**
+     * Rotate this wheel a given number of steps. Positive steps move
+     * foward, negative steps move backward
+     * @param steps the number of positions to rotate
+     */
+    public void spin(int steps){
+        if (isLocked || symbols.size() == 0 || steps == 0){
+            return;
+        }
+        visibleIn = currentIndex();
+        int bucle = Math.abs(steps);
+        for (int i = 0; i < bucle; i++){
+            if (steps > 0){
+                visibleIn += 1;
+                if (visibleIn >= symbols.size()){
+                    visibleIn = 0;
+                }
+            } else {
+                visibleIn -= 1;
+                if (visibleIn < 0){
+                    visibleIn = symbols.size() - 1;
+                }
+            }
+            updateBorder(visibleIn);
+            if (isVisible){
+                Canvas.getCanvas().wait(200);
+            }
+        }
+    }
+    
+    /**
+     * Move this wheel to a new horizontal position on the canvas
+     * @param xpos the new position of the wheel, starting at 1
+     */
+    public void relocate(int xpos){
+        int nuevoX = BASEX + (xpos - 1) * SEPARATIONX;
+        int delta = nuevoX - xPosition;
+        for(int i = 0; i < symbols.size(); i++){
+            symbols.get(i).moveHorizontal(delta);
+        }
+        border.moveHorizontal(delta);
+        xPosition = nuevoX;
+        borderX = borderX + delta;
+        
+    }
+    public boolean isLocked(){
+        return isLocked;
     }
 }

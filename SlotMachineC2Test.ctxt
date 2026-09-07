@@ -1,0 +1,8 @@
+#BlueJ class context
+#Sun Sep 06 20:46:48 COT 2026
+comment0.target=SlotMachineC2Test
+comment0.text=\r\n Default constructor for test class slotMachineC2Test\r\n
+comment1.target=void setUp()
+comment2.target=void shouldNotChangeConfigurationWhenLocked()
+comment3.target=void shouldStayLockedOnLastWheel()
+numComments=4

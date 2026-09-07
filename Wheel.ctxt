@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Aug 23 23:37:59 COT 2026
+#Sun Sep 06 20:02:17 COT 2026
 comment0.target=Wheel
 comment1.params=xpos
 comment1.target=Wheel(int)
@@ -7,8 +7,24 @@ comment1.text=\r\n Constructor for wheel \r\n @param xpos horizontal position of
 comment10.params=i
 comment10.target=void updateBorder(int)
 comment10.text=\r\n Move the border circle so it sits centered behind the symbol\r\n at index i, and bring that symbol back to the front so the\r\n border does not cover its color.\r\n @param i the index of the symbol that should be highlighted\r\n
-comment2.params=color
-comment2.target=void addSymbol(java.lang.String)
+comment11.params=symbol
+comment11.target=void placeSymbol(java.lang.String)
+comment12.target=void lock()
+comment12.text=\r\n Lock this wheel so that it cannot be spun or placed.\r\n
+comment13.target=void unlock()
+comment13.text=\r\n Unlock this wheel so that it can be spun again.\r\n
+comment14.params=color
+comment14.target=void setBorderColor(java.lang.String)
+comment14.text=\r\n Change the color of the border that marks the current symbol.\r\n @param color the CSS color name for the border\r\n
+comment15.params=steps
+comment15.target=void spin(int)
+comment15.text=\r\n Rotate this wheel a given number of steps. Positive steps move\r\n foward, negative steps move backward\r\n @param steps the number of positions to rotate\r\n
+comment16.params=xpos
+comment16.target=void relocate(int)
+comment16.text=\r\n Move this wheel to a new horizontal position on the canvas\r\n @param xpos the new position of the wheel, starting at 1\r\n
+comment17.target=boolean isLocked()
+comment2.params=pos color
+comment2.target=void addSymbol(int, java.lang.String)
 comment2.text=\r\n Add a symbol in a wheel \r\n @param color is the color of the symbol that will be added\r\n
 comment3.params=symbol
 comment3.target=void delSymbol(java.lang.String)
@@ -25,4 +41,4 @@ comment8.target=java.lang.String getVisibleSymbol()
 comment8.text=\r\n Return the color of the symbol currently marked as visible\r\n (the result of the last spin, or the first symbol by default\r\n if the wheel has never spun). Returns an empty string if the\r\n wheel has no symbols mounted.\r\n
 comment9.target=int currentIndex()
 comment9.text=\r\n Return the index that should be treated as "the current winning\r\n symbol" - index 0 by default if the wheel has never spun.\r\n
-numComments=11
+numComments=18

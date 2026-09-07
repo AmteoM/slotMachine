@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Aug 23 23:37:59 COT 2026
+#Sun Sep 06 19:55:58 COT 2026
 comment0.target=CSSColor
 comment0.text=\r\n Translates CSS standard color names into Color objects.\r\n @author (sus nombres)\r\n @version (fecha)\r\n
 comment1.params=name
